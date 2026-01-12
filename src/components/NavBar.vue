@@ -1,16 +1,19 @@
 <template>
-  <nav class="navbar">
-    <div class="nav-container">
-      <h1 class="nav-logo">Melody Meister</h1>
-      <ul class="nav-menu">
+  <nav class="bg-cyan-500 backdrop-blur-md py-4 border-b border-white/20">
+    <div class="max-w-[1200px] mx-auto flex justify-between items-center px-5">
+      <h1 class="text-white text-2xl">Melody Meister</h1>
+      <ul class="flex list-none gap-8">
         <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
+          <router-link to="/"
+            class="text-white no-underline font-medium py-2 px-4 rounded-[20px] transition-all duration-300 hover:bg-white/20 [&.router-link-active]:bg-white/20">Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/game" class="nav-link">Concurso</router-link>
+          <router-link to="/game"
+            class="text-white no-underline font-medium py-2 px-4 rounded-[20px] transition-all duration-300 hover:bg-white/20 [&.router-link-active]:bg-white/20">Concurso</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/ranking" class="nav-link">Ranking</router-link>
+          <router-link to="/ranking"
+            class="text-white no-underline font-medium py-2 px-4 rounded-[20px] transition-all duration-300 hover:bg-white/20 [&.router-link-active]:bg-white/20">Ranking</router-link>
         </li>
       </ul>
     </div>
@@ -22,46 +25,3 @@ export default {
   name: 'NavBar'
 }
 </script>
-
-<style scoped>
-.navbar {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.nav-logo {
-  color: white;
-  font-size: 1.5rem;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-.nav-link:hover,
-.nav-link.router-link-active {
-  background: rgba(255, 255, 255, 0.2);
-}
-</style>

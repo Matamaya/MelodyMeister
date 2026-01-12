@@ -10,7 +10,6 @@ const routes = [
   {
     path: '/game',
     name: 'game',
-    // Lazy loading para mejor performance
     component: () => import('../views/GameView.vue')
   },
   {

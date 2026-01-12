@@ -1,10 +1,10 @@
 <template>
-  <div class="ranking">
-    <div class="card">
-      <h2>🏆 Ranking Top 10</h2>
-      
-      <div v-if="rankingStore.topScores.length === 0" class="empty-ranking">
-        <div class="empty-icon">🎵</div>
+  <div class="w-[70%] text-center mx-auto pt-10 flex flex-row items-center h-fit">
+    <div class="card w-[60%]">
+      <h2 class="font-bold text-2xl">🏆 Ranking Top 10</h2>
+
+      <div v-if="rankingStore.topScores.length === 0" class="text-center p-5 flex flex-col gap-[10px]">
+        <div class="text-[4rem] mb-5">🎵</div>
         <h3>¡Aún no hay puntuaciones!</h3>
         <p>Sé el primero en entrar en el ranking</p>
         <router-link to="/game" class="btn btn-primary">
@@ -12,70 +12,48 @@
         </router-link>
       </div>
 
-      <div v-else class="ranking-content">
+      <div v-else class="my-[30px]">
         <div class="ranking-list">
-          <div 
-            v-for="(score, index) in rankingStore.topScores" 
-            :key="index"
-            :class="['ranking-item', getRankingClass(index)]"
-          >
-            <div class="rank-position">
-              <span v-if="index === 0" class="crown">👑</span>
-              <span v-else-if="index === 1" class="medal">🥈</span>
-              <span v-else-if="index === 2" class="medal">🥉</span>
-              <span v-else>{{ index + 1 }}</span>
+          <div v-for="(score, index) in rankingStore.topScores" :key="index"
+            :class="['flex items-center mb-[10px] rounded-[10px] bg-[#f8f9fa] transition-all duration-300 hover:translate-x-[5px] hover:shadow-lg md:flex-col md:text-center md:gap-[5px]', getRankingClass(index)]">
+            <div class="text-[1.5rem] font-medium text-center">
+              <span v-if="index === 0" class="text-[2rem]">1º puesto: {{ score.name }}</span>
+              <span v-else-if="index === 1" class="text-[2rem]">2º puesto: {{ score.name }}</span>
+              <span v-else-if="index === 2" class="text-[2rem]">3º puesto: {{ score.name }}</span>
+              <span v-else>{{ index + 1 }}º puesto: {{ score.name }}</span>
             </div>
-            
-            <div class="player-info">
-              <div class="player-name">{{ score.name }}</div>
-              <div class="player-stats">
+
+            <div class="flex-1">
+              <div class="text-[0.9rem] text-[#666] mt-[5px]">
                 {{ score.score }} puntos • {{ score.accuracy }}% precisión
               </div>
             </div>
-            
-            <div class="score-details">
-              <div class="score-date">{{ formatDate(score.date) }}</div>
-              <div class="score-time">{{ formatTime(score.listenTime) }}</div>
+
+            <div class="text-right md:text-center">
+              <div class="text-[0.9rem] text-[#666]">{{ formatDate(score.date) }}</div>
+              <div class="text-[0.8rem] text-[#999] mt-[5px]">{{ formatTime(score.listenTime) }}</div>
             </div>
           </div>
         </div>
 
-        <div class="current-player-info">
-          <div 
-            v-if="currentPlayerPosition && currentPlayerPosition <= 10"
-            class="current-player-highlight"
-          >
-            🎉 ¡Estás en el Top 10 en posición {{ currentPlayerPosition }}!
-          </div>
-          <div v-else class="current-player-message">
-            🔥 Sigue practicando para entrar en el Top 10
+        <div class="text-center p-5 my-5 rounded-[10px]">
+          <div v-if="currentPlayerPosition && currentPlayerPosition <= 10"
+            class="text-[1.2rem] font-bold text-[#667eea]">
+            ¡Estás en el Top 10 en posición {{ currentPlayerPosition }}!
           </div>
         </div>
       </div>
 
-      <div class="ranking-actions">
-        <button 
-          v-if="rankingStore.topScores.length > 0" 
-          @click="clearRanking" 
-          class="btn btn-secondary"
-        >
+      <div class="flex flex-row justify-center items-center gap-[15px]">
+        <button v-if="rankingStore.topScores.length > 0" @click="clearRanking" class="btn btn-secondary w-[80%]">
           Limpiar Ranking
         </button>
-        <router-link to="/game" class="btn btn-primary">
-          Jugar de Nuevo
-        </router-link>
+        <button class="btn btn-secondary w-[80%]">
+          <router-link to="/game">
+            Jugar de Nuevo
+          </router-link>
+        </button>
       </div>
-    </div>
-
-    <div class="card ranking-info">
-      <h3>📊 Información del Ranking</h3>
-      <ul class="info-list">
-        <li>👑 Oro para el primer puesto</li>
-        <li>🥈 Plata para el segundo puesto</li>
-        <li>🥉 Bronce para el tercer puesto</li>
-        <li>⚖️ En caso de empate, gana quien menos tiempo de escucha haya necesitado</li>
-        <li>💾 Las puntuaciones se guardan localmente en tu navegador</li>
-      </ul>
     </div>
   </div>
 </template>
@@ -97,9 +75,9 @@ export default {
     })
 
     const getRankingClass = (index) => {
-      if (index === 0) return 'first-place'
-      if (index === 1) return 'second-place'
-      if (index === 2) return 'third-place'
+      if (index === 0) return 'bg-gradient-to-r from-[#FFD700] to-[#FFF9C4] border-2 border-[#FFC107]'
+      if (index === 1) return 'bg-gradient-to-r from-[#C0C0C0] to-[#E0E0E0] border-2 border-[#9E9E9E]'
+      if (index === 2) return 'bg-gradient-to-r from-[#CD7F32] to-[#E8C6A3] border-2 border-[#795548]'
       return ''
     }
 
@@ -130,152 +108,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.ranking {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.empty-ranking {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.empty-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-}
-
-.ranking-list {
-  margin: 30px 0;
-}
-
-.ranking-item {
-  display: flex;
-  align-items: center;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  background: #f8f9fa;
-  transition: all 0.3s ease;
-}
-
-.ranking-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.ranking-item.first-place {
-  background: linear-gradient(45deg, #FFD700, #FFF9C4);
-  border: 2px solid #FFC107;
-}
-
-.ranking-item.second-place {
-  background: linear-gradient(45deg, #C0C0C0, #E0E0E0);
-  border: 2px solid #9E9E9E;
-}
-
-.ranking-item.third-place {
-  background: linear-gradient(45deg, #CD7F32, #E8C6A3);
-  border: 2px solid #795548;
-}
-
-.rank-position {
-  font-size: 1.5rem;
-  font-weight: bold;
-  width: 60px;
-  text-align: center;
-}
-
-.crown, .medal {
-  font-size: 2rem;
-}
-
-.player-info {
-  flex: 1;
-}
-
-.player-name {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #333;
-}
-
-.player-stats {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 5px;
-}
-
-.score-details {
-  text-align: right;
-}
-
-.score-date {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.score-time {
-  font-size: 0.8rem;
-  color: #999;
-  margin-top: 5px;
-}
-
-.current-player-info {
-  text-align: center;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 10px;
-  background: rgba(102, 126, 234, 0.1);
-}
-
-.current-player-highlight {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #667eea;
-}
-
-.current-player-message {
-  font-size: 1.1rem;
-  color: #666;
-}
-
-.ranking-actions {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.info-list {
-  list-style: none;
-  padding: 0;
-}
-
-.info-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.info-list li:last-child {
-  border-bottom: none;
-}
-
-@media (max-width: 768px) {
-  .ranking-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-  
-  .score-details {
-    text-align: center;
-  }
-  
-  .ranking-actions {
-    flex-direction: column;
-  }
-}
-</style>

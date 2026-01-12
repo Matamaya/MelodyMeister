@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply font-[system-ui] leading-relaxed text-white bg-[url('./assets/patron1.avif')] bg-no-repeat bg-center bg-cover min-h-screen;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-[rgba(0,38,59,0.267)] backdrop-blur-md rounded-2xl border border-white/10 shadow-lg p-6 flex flex-col w-1/2 mx-auto;
+  }
+
+  .btn {
+    @apply bg-white/10 backdrop-blur-[10px] border border-white/20 rounded-xl text-white py-3 px-7 text-base cursor-pointer transition-all duration-300 block mx-auto no-underline hover:bg-white/15 hover:border-white/30 hover:-translate-y-0.5 text-center;
+  }
+
+  .btn-primary {
+    @apply w-[30%];
+  }
+
+  .btn-secondary {
+    @apply bg-[#667eea] text-white hover:bg-[#778cf4] hover:-translate-y-0.5;
+  }
+}
